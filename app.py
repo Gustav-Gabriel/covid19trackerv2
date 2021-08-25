@@ -526,3 +526,16 @@ def getRelativesFromInfectedStudents():
 		return {"parentesInfectados": alunos}
 	else:
 		return make_response({"message": f"Está faltando o parâmetro nome."}, 400)
+	
+@app.route('/professors/confirmed/relatives', methods = ['GET'])
+def getRelativesFromInfectedProfessors():
+	data = request.get_json()
+	nome = data.get('nome')
+	alunos = []
+	if nome:
+		queryResultDictionary = pengineService.buscaProfessoresParentesDeUmProfessorInfectado(nome)
+		for item in queryResultDictionary:
+			alunos.append(item["X"])
+		return {"parentesInfectados": alunos}
+	else:
+		return make_response({"message": f"Está faltando o parâmetro nome."}, 400)
