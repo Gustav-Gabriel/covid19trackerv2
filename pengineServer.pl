@@ -77,3 +77,4 @@ sandbox:safe_primitive(pengineService:atualizar_pessoa_para_suspeita(_)).
 sandbox:safe_primitive(pengineService:atualizar_pessoa_para_morta(_)).
 sandbox:safe_primitive(pengineService:atualizar_pessoa_para_nao_infectada(_)).
 sandbox:safe_primitive(pengineService:busca_alunos_parentes_de_outro_aluno_infectado(_,_)).
+sandbox:safe_primitive(pengineService:busca_professores_parentes_de_outro_professor_infectado(_,_)).
