@@ -501,3 +501,18 @@ class PengineService:
             result = []
         pengine.iAmFinished(query)
         return result 
+    
+    def buscaProfessoresParentesDeUmProfessorInfectado(self, nome):
+        pengine = self.new_pengine()
+        question = "busca_professores_parentes_de_outro_professor_infectado(\""+nome+"\",X)"
+        print(question)
+        query = pengine.ask(f"{question}")
+        pengine.doAsk(query)
+        if pengine.currentQuery:
+            result = pengine.currentQuery.availProofs
+            while pengine.currentQuery.hasMore:
+                pengine.doNext(pengine.currentQuery)
+        else:
+            result = []
+        pengine.iAmFinished(query)
+        return result 
