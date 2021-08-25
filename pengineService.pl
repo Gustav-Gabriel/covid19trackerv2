@@ -48,6 +48,7 @@
     , atualizar_pessoa_para_morta/1
     , atualizar_pessoa_para_nao_infectada/1
     , busca_alunos_parentes_de_outro_aluno_infectado/2
+    , busca_professores_parentes_de_outro_professor_infectado/2
     ]
 ).
 
@@ -360,5 +361,8 @@ busca_quantidade_de_professores_nao_contaminadas(Pessoa, NaoContaminados) :-
 
 busca_alunos_parentes_de_outro_aluno_infectado(Aluno, Parente) :-
 	fact(aluno(Aluno)), fact(confirmado(Aluno)), fact(parente(Aluno, Parente)), fact(aluno(Parente)).
-	
+
+busca_professores_parentes_de_outro_professor_infectado(Professor, Parente) :-
+	fact(professor(Professor)), fact(confirmado(Professor)), fact(parente(Professor, Parente)), fact(professor(Parente)).
+
 fact --> { fact(fact, Fact1) }, [Fact1].
