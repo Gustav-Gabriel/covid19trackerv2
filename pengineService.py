@@ -56,7 +56,7 @@ class PengineService:
 
     def buscarQuantidadeDeCasosConfirmados(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_casos_confirmados(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_casos_confirmados(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -64,7 +64,7 @@ class PengineService:
 
     def buscarQuantidadeDeCasosDeSuspeita(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_casos_suspeitos(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_casos_suspeitos(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -72,7 +72,7 @@ class PengineService:
 
     def buscarQuantidadeDeMortos(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_casos_morte(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_casos_morte(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -80,7 +80,7 @@ class PengineService:
 
     def buscarQuantidadeDeNaoInfectados(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_de_pessoas_nao_contaminadas(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_de_pessoas_nao_contaminadas(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -88,7 +88,7 @@ class PengineService:
 
     def buscaAlunosConfirmadosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_alunos_contaminados_por_turma_e_semestre(X,\""+turma+"\","+semestre+")"
+        question = "busca_alunos_contaminados_por_turma_e_semestre(X,\""+turma+"\","+semestre+",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -102,7 +102,7 @@ class PengineService:
 
     def buscaQuantidadeDeAlunosContaminadosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_quantidade_de_alunos_contaminados_por_turma_e_semestre(X,\""+turma+"\","+semestre+", Contador)"
+        question = "busca_quantidade_de_alunos_contaminados_por_turma_e_semestre(X,\""+turma+"\","+semestre+", C)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
@@ -111,7 +111,7 @@ class PengineService:
 
     def buscaAlunosContaminadosPorTurmaECidade(self, turma, cidade):
         pengine = self.new_pengine()
-        question = "busca_alunos_contaminados_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\")"
+        question = "busca_alunos_contaminados_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -126,7 +126,7 @@ class PengineService:
 
     def buscaAlunosContaminadosPorVeiculo(self, veiculo):
         pengine = self.new_pengine()
-        question = "busca_alunos_contaminados_por_veiculo(X,\""+veiculo+"\")"
+        question = "busca_alunos_contaminados_por_veiculo(X,\""+veiculo+"\",N)"
         print(question)
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
@@ -141,7 +141,7 @@ class PengineService:
 
     def buscaAlunosSuspeitosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_alunos_suspeitos_por_turma_e_semestre(X,\""+turma+"\","+semestre+")"
+        question = "busca_alunos_suspeitos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -155,7 +155,7 @@ class PengineService:
 
     def buscaQuantidadeDeAlunosSuspeitosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_quantidade_de_alunos_suspeitos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",Contador)"
+        question = "busca_quantidade_de_alunos_suspeitos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",C)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
@@ -164,7 +164,7 @@ class PengineService:
 
     def buscaAlunosSuspeitosPorTurmaECidade(self, turma, cidade):
         pengine = self.new_pengine()
-        question = "busca_alunos_suspeitos_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\")"
+        question = "busca_alunos_suspeitos_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -178,7 +178,7 @@ class PengineService:
 
     def buscaAlunosSuspeitosPorVeiculo(self, veiculo):
         pengine = self.new_pengine()
-        question = "busca_alunos_suspeitos_por_veiculo(X,\""+veiculo+"\")"
+        question = "busca_alunos_suspeitos_por_veiculo(X,\""+veiculo+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -192,7 +192,7 @@ class PengineService:
 
     def buscaAlunosMortosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_alunos_mortos_por_turma_e_semestre(X,\""+turma+"\","+semestre+")"
+        question = "busca_alunos_mortos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -206,7 +206,7 @@ class PengineService:
 
     def buscaQuantidadeDeAlunosMortosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_quantidade_de_alunos_mortos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",Contador)"
+        question = "busca_quantidade_de_alunos_mortos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",C)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
@@ -215,7 +215,7 @@ class PengineService:
 
     def buscaAlunosMortosPorTurmaECidade(self, turma, cidade):
         pengine = self.new_pengine()
-        question = "busca_alunos_mortos_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\")"
+        question = "busca_alunos_mortos_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -229,7 +229,7 @@ class PengineService:
 
     def buscaAlunosMortosPorVeiculo(self, veiculo):
         pengine = self.new_pengine()
-        question = "busca_alunos_mortos_por_veiculo(X,\""+veiculo+"\")"
+        question = "busca_alunos_mortos_por_veiculo(X,\""+veiculo+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -243,7 +243,7 @@ class PengineService:
 
     def buscaProfessoresContaminadosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_professores_contaminados_por_turma_e_semestre(X,\""+turma+"\","+semestre+")"
+        question = "busca_professores_contaminados_por_turma_e_semestre(X,\""+turma+"\","+semestre+",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -257,7 +257,7 @@ class PengineService:
 
     def buscaQuantidadeDeProfessoresContaminadosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_quantidade_de_professores_contaminados_por_turma_e_semestre(X,\""+turma+"\","+semestre+",Contador)"
+        question = "busca_quantidade_de_professores_contaminados_por_turma_e_semestre(X,\""+turma+"\","+semestre+",C)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
@@ -266,7 +266,7 @@ class PengineService:
     
     def buscaProfessoresContaminadosPorTurmaECidade(self, turma, cidade):
         pengine = self.new_pengine()
-        question = "busca_professores_contaminados_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\")"
+        question = "busca_professores_contaminados_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -280,7 +280,7 @@ class PengineService:
 
     def buscaProfessoresContaminadosPorVeiculo(self, veiculo):
         pengine = self.new_pengine()
-        question = "busca_professores_contaminados_por_veiculo(X,\""+veiculo+"\")"
+        question = "busca_professores_contaminados_por_veiculo(X,\""+veiculo+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -294,7 +294,7 @@ class PengineService:
 
     def buscaProfessoresSuspeitosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_professores_suspeitos_por_turma_e_semestre(X,\""+turma+"\","+semestre+")"
+        question = "busca_professores_suspeitos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -308,7 +308,7 @@ class PengineService:
 
     def buscaQuantidadeDeProfessoresSuspeitosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_quantidade_de_professores_suspeitos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",Contador)"
+        question = "busca_quantidade_de_professores_suspeitos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",C)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
@@ -317,7 +317,7 @@ class PengineService:
     
     def buscaProfessoresSuspeitosPorTurmaECidade(self, turma, cidade):
         pengine = self.new_pengine()
-        question = "busca_professores_suspeitos_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\")"
+        question = "busca_professores_suspeitos_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -331,7 +331,7 @@ class PengineService:
 
     def buscaProfessoresSuspeitosPorVeiculo(self, veiculo):
         pengine = self.new_pengine()
-        question = "busca_professores_suspeitos_por_veiculo(X,\""+veiculo+"\")"
+        question = "busca_professores_suspeitos_por_veiculo(X,\""+veiculo+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -345,7 +345,7 @@ class PengineService:
 
     def buscaProfessoresMortosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_professores_mortos_por_turma_e_semestre(X,\""+turma+"\","+semestre+")"
+        question = "busca_professores_mortos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -359,7 +359,7 @@ class PengineService:
 
     def buscaQuantidadeDeProfessoresMortosPorTurmaESemestre(self, turma, semestre):
         pengine = self.new_pengine()
-        question = "busca_quantidade_de_professores_mortos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",Contador)"
+        question = "busca_quantidade_de_professores_mortos_por_turma_e_semestre(X,\""+turma+"\","+semestre+",C)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
@@ -368,7 +368,7 @@ class PengineService:
     
     def buscaProfessoresMortosPorTurmaECidade(self, turma, cidade):
         pengine = self.new_pengine()
-        question = "busca_professores_mortos_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\")"
+        question = "busca_professores_mortos_por_turma_e_cidade(X,\""+turma+"\",\""+cidade+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -382,7 +382,7 @@ class PengineService:
 
     def buscaProfessoresMortosPorVeiculo(self, veiculo):
         pengine = self.new_pengine()
-        question = "busca_professores_mortos_por_veiculo(X,\""+veiculo+"\")"
+        question = "busca_professores_mortos_por_veiculo(X,\""+veiculo+"\",N)"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         if pengine.currentQuery:
@@ -396,7 +396,7 @@ class PengineService:
 
     def buscarQuantidadeTotalDeAlunosConfirmados(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_alunos_confirmados(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_alunos_confirmados(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -404,7 +404,7 @@ class PengineService:
 
     def buscarQuantidadeTotalDeAlunosComSuspeita(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_alunos_suspeitos(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_alunos_suspeitos(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -412,7 +412,7 @@ class PengineService:
 
     def buscarQuantidadeTotalDeAlunosMortos(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_alunos_mortos(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_alunos_mortos(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -420,7 +420,7 @@ class PengineService:
 
     def buscarQuantidadeTotalDeAlunosNaoInfectados(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_de_alunos_nao_contaminadas(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_de_alunos_nao_contaminadas(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -428,7 +428,7 @@ class PengineService:
 
     def buscarQuantidadeTotalDeProfessoresConfirmados(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_professores_confirmados(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_professores_confirmados(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -436,7 +436,7 @@ class PengineService:
 
     def buscarQuantidadeTotalDeProfessoresComSuspeita(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_professores_suspeitos(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_professores_suspeitos(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -444,7 +444,7 @@ class PengineService:
 
     def buscarQuantidadeTotalDeProfessoresMortos(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_professores_mortos(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_professores_mortos(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
@@ -452,44 +452,44 @@ class PengineService:
 
     def buscarQuantidadeTotalDeProfessoresNaoInfectados(self):
         pengine = self.new_pengine()
-        query = pengine.ask(f"busca_quantidade_de_professores_nao_contaminadas(X,Counter)")
+        query = pengine.ask(f"busca_quantidade_de_professores_nao_contaminadas(X,C)")
         pengine.doAsk(query)
         result = pengine.currentQuery.availProofs
         pengine.iAmFinished(query)
         return result
 
-    def atualizarStatusDaPessoaParaConfirmada(self, nome):
+    def atualizarStatusDaPessoaParaConfirmada(self, registro):
         pengine = self.new_pengine()
-        question = "atualizar_pessoa_para_confirmada(\""+nome+"\")"
+        question = "atualizar_pessoa_para_confirmada("+registro+")"
         print(question)
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def atualizarStatusDaPessoaParaSuspeita(self, nome):
+    def atualizarStatusDaPessoaParaSuspeita(self, registro):
         pengine = self.new_pengine()
-        question = "atualizar_pessoa_para_suspeita(\""+nome+"\")"
+        question = "atualizar_pessoa_para_suspeita("+registro+")"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def atualizarStatusDaPessoaParaMorta(self, nome):
+    def atualizarStatusDaPessoaParaMorta(self, registro):
         pengine = self.new_pengine()
-        question = "atualizar_pessoa_para_morta(\""+nome+"\")"
+        question = "atualizar_pessoa_para_morta("+registro+")"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def atualizaStatusDaPessoaParaNaoInfectada(self, nome):
+    def atualizaStatusDaPessoaParaNaoInfectada(self, registro):
         pengine = self.new_pengine()
-        question = "atualizar_pessoa_para_nao_infectada(\""+nome+"\")"
+        question = "atualizar_pessoa_para_nao_infectada("+registro+")"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def buscaAlunosParentesDeUmAlunoInfectado(self, nome):
+    def buscaAlunosParentesDeUmAlunoInfectado(self, registro):
         pengine = self.new_pengine()
-        question = "busca_alunos_parentes_de_outro_aluno_infectado(\""+nome+"\",X)"
+        question = "busca_alunos_parentes_de_outro_aluno_infectado("+registro+",X,N)"
         print(question)
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
@@ -502,9 +502,39 @@ class PengineService:
         pengine.iAmFinished(query)
         return result 
     
-    def buscaProfessoresParentesDeUmProfessorInfectado(self, nome):
+    def buscaProfessoresParentesDeUmProfessorInfectado(self, registro):
         pengine = self.new_pengine()
-        question = "busca_professores_parentes_de_outro_professor_infectado(\""+nome+"\",X)"
+        question = "busca_professores_parentes_de_outro_professor_infectado("+registro+",X,N)"
+        print(question)
+        query = pengine.ask(f"{question}")
+        pengine.doAsk(query)
+        if pengine.currentQuery:
+            result = pengine.currentQuery.availProofs
+            while pengine.currentQuery.hasMore:
+                pengine.doNext(pengine.currentQuery)
+        else:
+            result = []
+        pengine.iAmFinished(query)
+        return result 
+
+    def buscaTurmasDeUmProfessorConfirmado(self, registro):
+        pengine = self.new_pengine()
+        question = "busca_turmas_de_um_professor_confirmado("+registro+",T)"
+        print(question)
+        query = pengine.ask(f"{question}")
+        pengine.doAsk(query)
+        if pengine.currentQuery:
+            result = pengine.currentQuery.availProofs
+            while pengine.currentQuery.hasMore:
+                pengine.doNext(pengine.currentQuery)
+        else:
+            result = []
+        pengine.iAmFinished(query)
+        return result 
+
+    def buscaTurmasDeUmProfessorComSuspeita(self, registro):
+        pengine = self.new_pengine()
+        question = "busca_turmas_de_um_professor_com_suspeita("+registro+",T)"
         print(question)
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)

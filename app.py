@@ -50,34 +50,34 @@ def inserirCasosMorte():
 @app.route('/api/casos/confirmados/quantidade', methods = ['GET'])
 def buscarQuantidadeDeCasosConfirmados():
 	queryResultDictionary = pengineService.buscarQuantidadeDeCasosConfirmados()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeDeCasosConfirmados": quantity}
+		quantidade = item["C"]
+	return {"quantidadeDeCasosConfirmados": quantidade}
 
 @app.route('/api/casos/suspeitas/quantidade', methods = ['GET'])
 def buscarQuantidadeDeCasosComSuspeita():
 	queryResultDictionary = pengineService.buscarQuantidadeDeCasosDeSuspeita()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeDeCasosComSuspeita": quantity}
+		quantidade = item["C"]
+	return {"quantidadeDeCasosComSuspeita": quantidade}
 
 @app.route('/api/casos/mortes/quantidade', methods = ['GET'])
 def buscarQuantidadeDeMortes():
 	queryResultDictionary = pengineService.buscarQuantidadeDeMortos()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeDeMortes": quantity}
+		quantidade = item["C"]
+	return {"quantidadeDeMortes": quantidade}
 
 @app.route('/api/casos/nao-infectados/quantidade', methods = ['GET'])
 def buscarQuantidadeDeCasosNaoInfectados():
 	queryResultDictionary = pengineService.buscarQuantidadeDeNaoInfectados()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeDeCasosDeNaoInfeccao": quantity}
+		quantidade = item["C"]
+	return {"quantidadeDeCasosDeNaoInfeccao": quantidade}
 
 @app.route('/api/alunos/confirmados', methods = ['GET'])
 def buscaAlunosConfirmados():
@@ -88,7 +88,8 @@ def buscaAlunosConfirmados():
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaAlunosConfirmadosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"alunosConfirmados": alunos}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
@@ -100,10 +101,10 @@ def buscaQuantidadeDeAlunosConfirmados():
 	semestre = data.get('semestre')
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaQuantidadeDeAlunosContaminadosPorTurmaESemestre(turma, semestre)
-		quantity = 0
+		quantidade = 0
 		for item in queryResultDictionary:
-			quantity = item["Contador"]
-		return {"quantidadeDeAlunosConfirmados": quantity}
+			quantidade = item["C"]
+		return {"quantidadeDeAlunosConfirmados": quantidade}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
@@ -116,7 +117,8 @@ def buscaAlunosConfirmadosPorCidade():
 	if turma and cidade:
 		queryResultDictionary = pengineService.buscaAlunosContaminadosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"alunosConfirmados": alunos}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
@@ -129,7 +131,8 @@ def buscaAlunosConfirmadosPorVeiculo():
 	if veiculo:
 		queryResultDictionary = pengineService.buscaAlunosContaminadosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"alunosConfirmados": alunos}
 	else:
 		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
@@ -143,7 +146,8 @@ def buscaAlunosComSuspeita():
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaAlunosSuspeitosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"alunosComSuspeita": alunos}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
@@ -155,10 +159,10 @@ def buscaQuantidadeDeAlunosComSuspeita():
 	semestre = data.get('semestre')
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaQuantidadeDeAlunosSuspeitosPorTurmaESemestre(turma, semestre)
-		quantity = 0
+		quantidade = 0
 		for item in queryResultDictionary:
-			quantity = item["Contador"]
-		return {"quantidadeDeAlunosComSuspeita": quantity}
+			quantidade = item["C"]
+		return {"quantidadeDeAlunosComSuspeita": quantidade}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
@@ -171,7 +175,8 @@ def buscaAlunosComSuspeitaPorCidade():
 	if turma and cidade:
 		queryResultDictionary = pengineService.buscaAlunosSuspeitosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"alunosComSuspeita": alunos}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
@@ -184,7 +189,8 @@ def buscaAlunosComSuspeitaPorVeiculo():
 	if veiculo:
 		queryResultDictionary = pengineService.buscaAlunosSuspeitosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"alunosComSuspeita": alunos}
 	else:
 		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
@@ -198,7 +204,8 @@ def buscaAlunosMortos():
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaAlunosMortosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"alunosMortos": alunos}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
@@ -210,10 +217,10 @@ def buscaQuantidadeDeAlunosMortos():
 	semestre = data.get('semestre')
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaQuantidadeDeAlunosMortosPorTurmaESemestre(turma, semestre)
-		quantity = 0
+		quantidade = 0
 		for item in queryResultDictionary:
-			quantity = item["Contador"]
-		return {"quantidadeDeAlunosMortos": quantity}
+			quantidade = item["C"]
+		return {"quantidadeDeAlunosMortos": quantidade}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
@@ -226,7 +233,8 @@ def buscaAlunosMortosPorCidade():
 	if turma and cidade:
 		queryResultDictionary = pengineService.buscaAlunosMortosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"alunosMortos": alunos}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
@@ -239,7 +247,8 @@ def buscaAlunosMortosPorVeiculo():
 	if veiculo:
 		queryResultDictionary = pengineService.buscaAlunosMortosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"alunosMortos": alunos}
 	else:
 		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
@@ -253,7 +262,8 @@ def buscaProfessoresConfirmados():
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaProfessoresContaminadosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
-			professores.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
 		return {"professoresConfirmados": professores}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
@@ -265,10 +275,10 @@ def buscaQuantidadeDeProfessoresConfirmados():
 	semestre = data.get('semestre')
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaQuantidadeDeProfessoresContaminadosPorTurmaESemestre(turma, semestre)
-		quantity = 0
+		quantidade = 0
 		for item in queryResultDictionary:
-			quantity = item["Contador"]
-		return {"quantidadeDeProfessoresConfirmados": quantity}
+			quantidade = item["C"]
+		return {"quantidadeDeProfessoresConfirmados": quantidade}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
@@ -281,7 +291,8 @@ def buscaProfessoresConfirmadosPorCidade():
 	if turma and cidade:
 		queryResultDictionary = pengineService.buscaProfessoresContaminadosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
-			professores.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
 		return {"professoresConfirmados": professores}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
@@ -294,7 +305,8 @@ def buscaProfessoresConfirmadosPorVeiculo():
 	if veiculo:
 		queryResultDictionary = pengineService.buscaProfessoresContaminadosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
-			professores.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
 		return {"professoresConfirmados": professores}
 	else:
 		return make_response({"mensage": f"Está faltando o parâmetro veículo."}, 400)
@@ -308,7 +320,8 @@ def buscaProfessoresComSuspeita():
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaProfessoresSuspeitosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
-			professores.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
 		return {"professoresComSuspeita": professores}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
@@ -320,15 +333,15 @@ def buscaQuantidadeDeProfessoresComSuspeita():
 	semestre = data.get('semestre')
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaQuantidadeDeProfessoresSuspeitosPorTurmaESemestre(turma, semestre)
-		quantity = 0
+		quantidade = 0
 		for item in queryResultDictionary:
-			quantity = item["Contador"]
-		return {"quantidadeDeProfessoresComSuspeita": quantity}
+			quantidade = item["C"]
+		return {"quantidadeDeProfessoresComSuspeita": quantidade}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
 @app.route('/api/professores/cidade/suspeitas', methods = ['GET'])
-def buscaProfessoresComSuspeitaPorVeiculo():
+def buscaProfessoresComSuspeitaPorCidade():
 	data = request.get_json()
 	turma = data.get('turma')
 	cidade = data.get('cidade')
@@ -336,7 +349,8 @@ def buscaProfessoresComSuspeitaPorVeiculo():
 	if turma and cidade:
 		queryResultDictionary = pengineService.buscaProfessoresSuspeitosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
-			professores.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
 		return {"professoresComSuspeita": professores}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
@@ -349,7 +363,8 @@ def buscaProfessoresComSuspeitaPorVeiculo():
 	if veiculo:
 		queryResultDictionary = pengineService.buscaProfessoresSuspeitosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
-			professores.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
 		return {"professoresComSuspeita": professores}
 	else:
 		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
@@ -363,22 +378,23 @@ def buscaProfessoresMortos():
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaProfessoresMortosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
-			professores.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
 		return {"professoresMortos": professores}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/api/professores/mortos/quantidede', methods = ['GET'])
+@app.route('/api/professores/mortos/quantidade', methods = ['GET'])
 def buscaQuantidadeDeProfessoresMortos():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
 	if turma and semestre:
 		queryResultDictionary = pengineService.buscaQuantidadeDeProfessoresMortosPorTurmaESemestre(turma, semestre)
-		quantity = 0
+		quantidade = 0
 		for item in queryResultDictionary:
-			quantity = item["Contador"]
-		return {"quantidadeDeProfessoresMortos": quantity}
+			quantidade = item["C"]
+		return {"quantidadeDeProfessoresMortos": quantidade}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
@@ -391,7 +407,8 @@ def buscaProfessoresMortosPorCidade():
 	if turma and cidade:
 		queryResultDictionary = pengineService.buscaProfessoresMortosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
-			professores.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
 		return {"professoresMortos": professores}
 	else:
 		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
@@ -404,138 +421,169 @@ def bsucaProfessoresMortosPorVeiculo():
 	if veiculo:
 		queryResultDictionary = pengineService.buscaProfessoresMortosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
-			professores.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
 		return {"professoresMortos": professores}
 	else:
 		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
 
 
-@app.route('/api/casos/confirmados/alunos/quantidede', methods = ['GET'])
+@app.route('/api/casos/confirmados/alunos/quantidade', methods = ['GET'])
 def buscaQuantidadaTotalDeAlunosConfirmados():
 	queryResultDictionary = pengineService.buscarQuantidadeTotalDeAlunosConfirmados()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeTotalDeAlunosConfirmados": quantity}
+		quantidade = item["C"]
+	return {"quantidadeTotalDeAlunosConfirmados": quantidade}
 
-@app.route('/api/casos/suspeitas/alunos/quntidade', methods = ['GET'])
+@app.route('/api/casos/suspeitas/alunos/quantidade', methods = ['GET'])
 def buscaQuantidadeTotalDeAlunosComSuspeita():
 	queryResultDictionary = pengineService.buscarQuantidadeTotalDeAlunosComSuspeita()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeTotalDeAlunosComSuspeita": quantity}
+		quantidade = item["C"]
+	return {"quantidadeTotalDeAlunosComSuspeita": quantidade}
 
 @app.route('/api/casos/mortos/alunos/quantidade', methods = ['GET'])
 def buscaQuantidadeTotalDeAlunosMortos():
 	queryResultDictionary = pengineService.buscarQuantidadeTotalDeAlunosMortos()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeTotalDeAlunosMortos": quantity}
+		quantidade = item["C"]
+	return {"quantidadeTotalDeAlunosMortos": quantidade}
 
 @app.route('/api/casos/nao-infectados/alunos/quantidade', methods = ['GET'])
 def buscaQuantidadeTotalDeAlunosNaoInfectados():
 	queryResultDictionary = pengineService.buscarQuantidadeTotalDeAlunosNaoInfectados()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeTotalDeAlunosNaoInfectados": quantity}
+		quantidade = item["C"]
+	return {"quantidadeTotalDeAlunosNaoInfectados": quantidade}
 
 @app.route('/api/casos/confirmados/professores/quantidade', methods = ['GET'])
 def buscaQuantidadeTotalDeProfessoresConfirmados():
 	queryResultDictionary = pengineService.buscarQuantidadeTotalDeProfessoresConfirmados()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quanditadeTotalDeProfessoresConfirmados": quantity}
+		quantidade = item["C"]
+	return {"quanditadeTotalDeProfessoresConfirmados": quantidade}
 
 @app.route('/api/casos/suspeitas/professores/quantidade', methods = ['GET'])
 def buscaQuantidadeTotalDeProfessoresComSuspeita():
 	queryResultDictionary = pengineService.buscarQuantidadeTotalDeProfessoresComSuspeita()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeTotalDeProfessoresComSuspeita": quantity}
+		quantidade = item["C"]
+	return {"quantidadeTotalDeProfessoresComSuspeita": quantidade}
 
 @app.route('/api/casos/mortos/professores/quantidade', methods = ['GET'])
 def buscaQuantidadeTotalDeProfessoreMortos():
 	queryResultDictionary = pengineService.buscarQuantidadeTotalDeProfessoresMortos()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"buscaQuantidadeTotalDeProfessoresMortos": quantity}
+		quantidade = item["C"]
+	return {"buscaQuantidadeTotalDeProfessoresMortos": quantidade}
 
-@app.route('/api/casos/nao-infectados/professores/quantidede', methods = ['GET'])
+@app.route('/api/casos/nao-infectados/professores/quantidade', methods = ['GET'])
 def buscaQuantidadeTotalDeProfessoresNaoInfectados():
 	queryResultDictionary = pengineService.buscarQuantidadeTotalDeProfessoresNaoInfectados()
-	quantity = 0
+	quantidade = 0
 	for item in queryResultDictionary:
-		quantity = item["Counter"]
-	return {"quantidadeTotalDeProfessoresNaoInfectados": quantity}
+		quantidade = item["C"]
+	return {"quantidadeTotalDeProfessoresNaoInfectados": quantidade}
 
 @app.route('/api/pessoa/status/confirmados', methods = ['PUT'])
 def atualizaStatusDaPessoaParaConfirmado():
 	data = request.get_json()
-	nome = data.get('nome')
-	if nome:
-		pengineService.atualizarStatusDaPessoaParaConfirmada(nome)
+	registro = data.get('registro')
+	if registro:
+		pengineService.atualizarStatusDaPessoaParaConfirmada(registro)
 		return f"Status atualizado com sucesso!."
 	else:
-		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro registro."}, 400)
 
 @app.route('/api/pessoa/status/suspeita', methods = ['PUT'])
 def atualizaStatusdaPessoaParaSuspeita():
 	data = request.get_json()
-	nome = data.get('nome')
-	if nome:
-		pengineService.atualizarStatusDaPessoaParaSuspeita(nome)
+	registro = data.get('registro')
+	if registro:
+		pengineService.atualizarStatusDaPessoaParaSuspeita(registro)
 		return f"Status atualizado com sucesso!."
 	else:
-		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro registro."}, 400)
 
 @app.route('/api/pessoa/status/morta', methods = ['PUT'])
 def atualizaStatusDaPessoaParaMorta():
 	data = request.get_json()
-	nome = data.get('nome')
-	if nome:
-		pengineService.atualizarStatusDaPessoaParaMorta(nome)
+	registro = data.get('registro')
+	if registro:
+		pengineService.atualizarStatusDaPessoaParaMorta(registro)
 		return f"Status atualizado com sucesso!."
 	else:
-		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro registro."}, 400)
 
 @app.route('/api/pessoa/status/nao-infectada', methods = ['PUT'])
 def atualizaStatusDaPessoaParaNaoInfectada():
 	data = request.get_json()
-	nome = data.get('nome')
-	if nome:
-		pengineService.atualizaStatusDaPessoaParaNaoInfectada(nome)
+	registro = data.get('registro')
+	if registro:
+		pengineService.atualizaStatusDaPessoaParaNaoInfectada(registro)
 		return f"Status atualizado com sucesso!."
 	else:
-		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro registro."}, 400)
 
 @app.route('/api/alunos/confirmados/parentes', methods = ['GET'])
 def buscaAlunosParentesDeUmAlunoInfectado():
 	data = request.get_json()
-	nome = data.get('nome')
+	registro = data.get('registro')
 	alunos = []
-	if nome:
-		queryResultDictionary = pengineService.buscaAlunosParentesDeUmAlunoInfectado(nome)
+	if registro:
+		queryResultDictionary = pengineService.buscaAlunosParentesDeUmAlunoInfectado(registro)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			alunos.append(json.loads(objetoString))
 		return {"parentesInfectados": alunos}
 	else:
-		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro registro."}, 400)
 	
 @app.route('/api/professores/confirmados/parentes', methods = ['GET'])
 def buscaProfessoreParentesDeUmProfessorInfectado():
 	data = request.get_json()
-	nome = data.get('nome')
-	alunos = []
-	if nome:
-		queryResultDictionary = pengineService.buscaProfessoresParentesDeUmProfessorInfectado(nome)
+	registro = data.get('registro')
+	professores = []
+	if registro:
+		queryResultDictionary = pengineService.buscaProfessoresParentesDeUmProfessorInfectado(registro)
 		for item in queryResultDictionary:
-			alunos.append(item["X"])
-		return {"parentesInfectados": alunos}
+			objetoString = json.dumps({"registro": item["X"], "nome": item["N"]})
+			professores.append(json.loads(objetoString))
+		return {"parentesInfectados": professores}
 	else:
-		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro registro."}, 400)
+
+@app.route('/api/professores/professor/confirmado/turmas', methods = ['GET'])
+def buscaTurmasDeUmProfessorConfirmado():
+	data = request.get_json()
+	registro = data.get('registro')
+	professores = []
+	if registro:
+		queryResultDictionary = pengineService.buscaTurmasDeUmProfessorConfirmado(registro)
+		for item in queryResultDictionary:
+			objetoString = json.dumps({"turma": item["T"]})
+			professores.append(json.loads(objetoString))
+		return {"turmas": professores}
+	else:
+		return make_response({"mensagem": f"Está faltando o parâmetro registro."}, 400)
+
+@app.route('/api/professores/professor/suspeita/turmas', methods = ['GET'])
+def buscaTurmasDeUmProfessorComSuspeita():
+	data = request.get_json()
+	registro = data.get('registro')
+	professores = []
+	if registro:
+		queryResultDictionary = pengineService.buscaTurmasDeUmProfessorComSuspeita(registro)
+		for item in queryResultDictionary:
+			objetoString = json.dumps({"turma": item["T"]})
+			professores.append(json.loads(objetoString))
+		return {"turmas": professores}
+	else:
+		return make_response({"mensagem": f"Está faltando o parâmetro registro."}, 400)
