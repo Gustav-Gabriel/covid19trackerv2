@@ -12,49 +12,49 @@ class PengineService:
     def new_pengine(self) :
         return Pengine(builder=self.pengine_builder)
 
-    def insertRelatives(self, json):
+    def inserirParentes(self, json):
         print(json)
         pengine = self.new_pengine()
         query = pengine.ask(f"inserir_parentes('{json}')")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def insertProfessors(self, json):
+    def inserirProfessores(self, json):
         print(json)
         pengine = self.new_pengine()
         query = pengine.ask(f"inserir_professores('{json}')")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def insertStudents(self, json):
+    def inserirAlunos(self, json):
         print(json)
         pengine = self.new_pengine()
         query = pengine.ask(f"inserir_alunos('{json}')")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def insertConfirmedCases(self, json):
+    def inserirCasosConfirmados(self, json):
         print(json)
         pengine = self.new_pengine()
         query = pengine.ask(f"inserir_casos_confirmados('{json}')")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def insertSuspiciousCases(self, json):
+    def inserirCasosDeSuspeita(self, json):
         print(json)
         pengine = self.new_pengine()
         query = pengine.ask(f"inserir_casos_suspeitos('{json}')")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def insertDeathCases(self, json):
+    def inserirCasosDeMorte(self, json):
         print(json)
         pengine = self.new_pengine()
         query = pengine.ask(f"inserir_casos_morte('{json}')")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def getConfirmedCasesAmount(self):
+    def buscarQuantidadeDeCasosConfirmados(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_casos_confirmados(X,Counter)")
         pengine.doAsk(query)
@@ -62,7 +62,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getSuspiciousCasesAmount(self):
+    def buscarQuantidadeDeCasosDeSuspeita(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_casos_suspeitos(X,Counter)")
         pengine.doAsk(query)
@@ -70,7 +70,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getDeathsAmount(self):
+    def buscarQuantidadeDeMortos(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_casos_morte(X,Counter)")
         pengine.doAsk(query)
@@ -78,7 +78,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getNonInfectedAmount(self):
+    def buscarQuantidadeDeNaoInfectados(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_de_pessoas_nao_contaminadas(X,Counter)")
         pengine.doAsk(query)
@@ -394,7 +394,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result 
 
-    def getAllStudentsConfirmedCasesAmount(self):
+    def buscarQuantidadeTotalDeAlunosConfirmados(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_alunos_confirmados(X,Counter)")
         pengine.doAsk(query)
@@ -402,7 +402,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getAllStudentsSuspiciousCasesAmount(self):
+    def buscarQuantidadeTotalDeAlunosComSuspeita(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_alunos_suspeitos(X,Counter)")
         pengine.doAsk(query)
@@ -410,7 +410,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getAllStudentsDeathsAmount(self):
+    def buscarQuantidadeTotalDeAlunosMortos(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_alunos_mortos(X,Counter)")
         pengine.doAsk(query)
@@ -418,7 +418,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getAllUninfectedStudentsAmount(self):
+    def buscarQuantidadeTotalDeAlunosNaoInfectados(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_de_alunos_nao_contaminadas(X,Counter)")
         pengine.doAsk(query)
@@ -426,7 +426,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getAllProfessorsConfirmedCasesAmount(self):
+    def buscarQuantidadeTotalDeProfessoresConfirmados(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_professores_confirmados(X,Counter)")
         pengine.doAsk(query)
@@ -434,7 +434,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getAllProfessorsSuspiciousCasesAmount(self):
+    def buscarQuantidadeTotalDeProfessoresComSuspeita(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_professores_suspeitos(X,Counter)")
         pengine.doAsk(query)
@@ -442,7 +442,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getAllProfessorsDeathsAmount(self):
+    def buscarQuantidadeTotalDeProfessoresMortos(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_professores_mortos(X,Counter)")
         pengine.doAsk(query)
@@ -450,7 +450,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def getAllUninfectedProfessorsAmount(self):
+    def buscarQuantidadeTotalDeProfessoresNaoInfectados(self):
         pengine = self.new_pengine()
         query = pengine.ask(f"busca_quantidade_de_professores_nao_contaminadas(X,Counter)")
         pengine.doAsk(query)
@@ -458,7 +458,7 @@ class PengineService:
         pengine.iAmFinished(query)
         return result
 
-    def updatePersonStatusToConfirmed(self, nome):
+    def atualizarStatusDaPessoaParaConfirmada(self, nome):
         pengine = self.new_pengine()
         question = "atualizar_pessoa_para_confirmada(\""+nome+"\")"
         print(question)
@@ -466,21 +466,21 @@ class PengineService:
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def updatePersonStatusToSuspect(self, nome):
+    def atualizarStatusDaPessoaParaSuspeita(self, nome):
         pengine = self.new_pengine()
         question = "atualizar_pessoa_para_suspeita(\""+nome+"\")"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def updatePersonStatusToDead(self, nome):
+    def atualizarStatusDaPessoaParaMorta(self, nome):
         pengine = self.new_pengine()
         question = "atualizar_pessoa_para_morta(\""+nome+"\")"
         query = pengine.ask(f"{question}")
         pengine.doAsk(query)
         pengine.iAmFinished(query)
 
-    def updatePersonStatusToNonInfected(self, nome):
+    def atualizaStatusDaPessoaParaNaoInfectada(self, nome):
         pengine = self.new_pengine()
         question = "atualizar_pessoa_para_nao_infectada(\""+nome+"\")"
         query = pengine.ask(f"{question}")

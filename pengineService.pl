@@ -1,7 +1,6 @@
 % inicio da aplicacao em prolog configurando pengine e funcoes
 :- module(pengineService,
-    [ adicionar_tudo_na_base/1
-    , inserir_parentes/1
+    [ inserir_parentes/1
     , inserir_professores/1
     , inserir_alunos/1
     , inserir_casos_confirmados/1
@@ -65,65 +64,6 @@
 % Funcao recursiva para inserir varios predicatos
 adicionar_todos_predicatos([]).
 adicionar_todos_predicatos([Atual|Resto]) :- assert_fact(Atual), nl, print(Atual), nl, adicionar_todos_predicatos(Resto).
-
-% Inserir tudo de uma vez
-adicionar_tudo_na_base(Json) :- 
-    atom_json_dict(Json, DicionarioDeAlunos, [default_tag(pessoa)]),
-    dicts_to_compounds(DicionarioDeAlunos.alunos, [nome], dict_fill(null), Pessoas),
-    adicionar_todos_predicatos(Pessoas),
-    atom_json_dict(Json, DicionarioDeAlunos, [default_tag(aluno)]),
-    dicts_to_compounds(DicionarioDeAlunos.alunos, [nome], dict_fill(null), Alunos),
-    adicionar_todos_predicatos(Alunos),
-    atom_json_dict(Json, DicionarioDeAlunosPorTurma, [default_tag(aluno_turma)]),
-    dicts_to_compounds(DicionarioDeAlunosPorTurma.alunosTurma, [nome, turma], dict_fill(null), AlunosTurma),
-    adicionar_todos_predicatos(AlunosTurma),
-    atom_json_dict(Json, DicionarioDeAlunosPorSemestre, [default_tag(aluno_semestre)]),
-    dicts_to_compounds(DicionarioDeAlunosPorSemestre.alunosSemestre, [nome, semestre], dict_fill(null), AlunosSemestre),
-    adicionar_todos_predicatos(AlunosSemestre),
-    atom_json_dict(Json, DicionarioDeAlunosPorTransporte, [default_tag(aluno_transporte)]),
-    dicts_to_compounds(DicionarioDeAlunosPorTransporte.alunosTransporte, [nome, transporte], dict_fill(null), AlunosTransporte),
-    adicionar_todos_predicatos(AlunosTransporte),
-    atom_json_dict(Json, DicionarioDeAlunosPorCidade, [default_tag(aluno_cidade)]),
-    dicts_to_compounds(DicionarioDeAlunosPorCidade.alunosCidade, [nome, cidade], dict_fill(null), AlunosCidade),
-    adicionar_todos_predicatos(AlunosCidade),
-    
-    atom_json_dict(Json, DicionarioDeProfessores, [default_tag(pessoa)]),
-    dicts_to_compounds(DicionarioDeProfessores.professores, [nome], dict_fill(null), Pessoas),
-    adicionar_todos_predicatos(Pessoas),
-    atom_json_dict(Json, DicionarioDeProfessores, [default_tag(professor)]),
-    dicts_to_compounds(DicionarioDeProfessores.professores, [nome], dict_fill(null), Professores),
-    adicionar_todos_predicatos(Professores),
-    atom_json_dict(Json, DicionarioDeProfessoresPorTurma, [default_tag(professor_turma)]),
-    dicts_to_compounds(DicionarioDeProfessoresPorTurma.professoresTurma, [nome, turma], dict_fill(null), ProfessoresTurma),
-    adicionar_todos_predicatos(ProfessoresTurma),
-    atom_json_dict(Json, DicionarioDeProfessoresPorSemestre, [default_tag(professor_semestre)]),
-    dicts_to_compounds(DicionarioDeProfessoresPorSemestre.professoresSemestre, [nome, semestre], dict_fill(null), ProfessoresSemestre),
-    adicionar_todos_predicatos(ProfessoresSemestre),
-    atom_json_dict(Json, DicionarioDeProfessoresPorTransporte, [default_tag(professor_transporte)]),
-    dicts_to_compounds(DicionarioDeProfessoresPorTransporte.professoresTransporte, [nome, transporte], dict_fill(null), ProfessoresTransporte),
-    adicionar_todos_predicatos(ProfessoresTransporte),
-    atom_json_dict(Json, DicionarioDeProfessoresPorCidade, [default_tag(professor_cidade)]),
-    dicts_to_compounds(DicionarioDeProfessoresPorCidade.professoresCidade, [nome, cidade], dict_fill(null), ProfessoresCidade),
-    adicionar_todos_predicatos(ProfessoresCidade),
-
-    atom_json_dict(Json, DicionarioDeParentes, [default_tag(parente)]),
-    dicts_to_compounds(DicionarioDeParentes.parentes, [parente1, parente2], dict_fill(null), Parentes),
-    adicionar_todos_predicatos(Parentes),
-    atom_json_dict(Json, DicionarioDeParentes, [default_tag(parente)]),
-    dicts_to_compounds(DicionarioDeParentes.parentes, [parente2, parente1], dict_fill(null), Parentes),
-    adicionar_todos_predicatos(Parentes),
-
-    atom_json_dict(Json, DicionarioCasosConfirmados, [default_tag(confirmado)]),
-    dicts_to_compounds(DicionarioCasosConfirmados.confirmados, [nome], dict_fill(null), Confirmados),
-    adicionar_todos_predicatos(Confirmados),
-
-    atom_json_dict(Json, DicionarioCasosSuspeitos, [default_tag(suspeito)]),
-    dicts_to_compounds(DicionarioCasosSuspeitos.suspeitos, [nome], dict_fill(null), Suspeitos),
-    adicionar_todos_predicatos(Suspeitos),
-
-    atom_json_dict(Json, DicionarioCasosMorte, [default_tag(morte)]),
-    dicts_to_compounds(DicionarioCasosMorte.deaths, [nome], dict_fill(null), Mortes),
-    adicionar_todos_predicatos(Mortes).
 
 % inserts by predicate
 

@@ -29,7 +29,6 @@ serve :-
 % Sandbox the predicates deemed unsafe due to using a mutex.
 :- use_module(library(sandbox)).
 :- multifile sandbox:safe_primitive/1.
-sandbox:safe_primitive(pengineService:adicionar_tudo_na_base(_)).
 sandbox:safe_primitive(pengineService:inserir_parentes(_)).
 sandbox:safe_primitive(pengineService:inserir_professores(_)).
 sandbox:safe_primitive(pengineService:inserir_alunos(_)).

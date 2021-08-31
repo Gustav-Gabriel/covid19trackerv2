@@ -5,82 +5,82 @@ import json
 app = Flask(__name__)
 pengineService = PengineService()
 
-@app.route('/api/people/relative', methods = ['POST'])
-def insertParentes():
+@app.route('/api/pessoas/parentes', methods = ['POST'])
+def inserirParentes():
 	data = request.get_json()
 	jsonData = json.dumps(data)
-	pengineService.insertRelatives(jsonData)
+	pengineService.inserirParentes(jsonData)
 	return f"Os dados foram cadastrados com sucesso!."
 
-@app.route('/api/professors', methods = ['POST'])
-def insertProfessors():
+@app.route('/api/professores', methods = ['POST'])
+def inserirProfessors():
 	data = request.get_json()
 	jsonData = json.dumps(data)
-	pengineService.insertProfessors(jsonData)
+	pengineService.inserirProfessores(jsonData)
 	return f"Os dados foram cadastrados com sucesso!."
 
-@app.route('/api/students', methods = ['POST'])
-def insertStudents():
+@app.route('/api/alunos', methods = ['POST'])
+def inserirAlunos():
 	data = request.get_json()
 	jsonData = json.dumps(data)
-	pengineService.insertStudents(jsonData)
+	pengineService.inserirAlunos(jsonData)
 	return f"Os dados foram cadastrados com sucesso!."
 
-@app.route('/api/cases/confirmed', methods = ['POST'])
-def insertConfirmedCases():
+@app.route('/api/casos/confirmados', methods = ['POST'])
+def inserirCasosConfirmados():
 	data = request.get_json()
 	jsonData = json.dumps(data)
-	pengineService.insertConfirmedCases(jsonData)
+	pengineService.inserirCasosConfirmados(jsonData)
 	return f"Os dados foram cadastrados com sucesso!."
 
-@app.route('/api/cases/suspicious', methods = ['POST'])
-def insertSuspiciousCases():
+@app.route('/api/casos/suspeitas', methods = ['POST'])
+def inserirCasosSuspeitas():
 	data = request.get_json()
 	jsonData = json.dumps(data)
-	pengineService.insertSuspiciousCases(jsonData)
+	pengineService.inserirCasosDeSuspeita(jsonData)
 	return f"Os dados foram cadastrados com sucesso!."
 
-@app.route('/api/cases/death', methods = ['POST'])
-def insertDeathCases():
+@app.route('/api/casos/mortos', methods = ['POST'])
+def inserirCasosMorte():
 	data = request.get_json()
 	jsonData = json.dumps(data)
-	pengineService.insertDeathCases(jsonData)
+	pengineService.inserirCasosDeMorte(jsonData)
 	return f"Os dados foram cadastrados com sucesso!."
 
-@app.route('/cases/confirmed/amount', methods = ['GET'])
-def getConfirmedCases():
-	queryResultDictionary = pengineService.getConfirmedCasesAmount()
+@app.route('/api/casos/confirmados/quantidade', methods = ['GET'])
+def buscarQuantidadeDeCasosConfirmados():
+	queryResultDictionary = pengineService.buscarQuantidadeDeCasosConfirmados()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"confirmedCasesAmount": quantity}
+	return {"quantidadeDeCasosConfirmados": quantity}
 
-@app.route('/cases/suspicious/amount', methods = ['GET'])
-def getSuspiciousCases():
-	queryResultDictionary = pengineService.getSuspiciousCasesAmount()
+@app.route('/api/casos/suspeitas/quantidade', methods = ['GET'])
+def buscarQuantidadeDeCasosComSuspeita():
+	queryResultDictionary = pengineService.buscarQuantidadeDeCasosDeSuspeita()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"suspiciousCasesAmount": quantity}
+	return {"quantidadeDeCasosComSuspeita": quantity}
 
-@app.route('/cases/deaths/amount', methods = ['GET'])
-def getDeaths():
-	queryResultDictionary = pengineService.getDeathsAmount()
+@app.route('/api/casos/mortes/quantidade', methods = ['GET'])
+def buscarQuantidadeDeMortes():
+	queryResultDictionary = pengineService.buscarQuantidadeDeMortos()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"deathsAmount": quantity}
+	return {"quantidadeDeMortes": quantity}
 
-@app.route('/cases/non-infected/amount', methods = ['GET'])
-def getNotInfected():
-	queryResultDictionary = pengineService.getNonInfectedAmount()
+@app.route('/api/casos/nao-infectados/quantidade', methods = ['GET'])
+def buscarQuantidadeDeCasosNaoInfectados():
+	queryResultDictionary = pengineService.buscarQuantidadeDeNaoInfectados()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"nonInfectedPeopleAmount": quantity}
+	return {"quantidadeDeCasosDeNaoInfeccao": quantity}
 
-@app.route('/students/confirmed', methods = ['GET'])
-def getConfirmedStudents():
+@app.route('/api/alunos/confirmados', methods = ['GET'])
+def buscaAlunosConfirmados():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -89,12 +89,12 @@ def getConfirmedStudents():
 		queryResultDictionary = pengineService.buscaAlunosConfirmadosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
 			alunos.append(item["X"])
-		return {"confirmedStudents": alunos}
+		return {"alunosConfirmados": alunos}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/students/confirmed/amount', methods = ['GET'])
-def getConfirmedStudentsAmount():
+@app.route('/api/alunos/confirmados/quantidade', methods = ['GET'])
+def buscaQuantidadeDeAlunosConfirmados():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -103,12 +103,12 @@ def getConfirmedStudentsAmount():
 		quantity = 0
 		for item in queryResultDictionary:
 			quantity = item["Contador"]
-		return {"confirmedStudentsAmount": quantity}
+		return {"quantidadeDeAlunosConfirmados": quantity}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/students/city/confirmed', methods = ['GET'])
-def getConfirmedStudentsByCity():
+@app.route('/api/alunos/cidade/confirmados', methods = ['GET'])
+def buscaAlunosConfirmadosPorCidade():
 	data = request.get_json()
 	turma = data.get('turma')
 	cidade = data.get('cidade')
@@ -117,12 +117,12 @@ def getConfirmedStudentsByCity():
 		queryResultDictionary = pengineService.buscaAlunosContaminadosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
 			alunos.append(item["X"])
-		return {"confirmedStudents": alunos}
+		return {"alunosConfirmados": alunos}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or cidade for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
 	
-@app.route('/students/vehicle/confirmed', methods = ['GET'])
-def getConfirmedStudentsByVehicle():
+@app.route('/api/alunos/veiculo/confirmados', methods = ['GET'])
+def buscaAlunosConfirmadosPorVeiculo():
 	data = request.get_json()
 	veiculo = data.get('veiculo')
 	alunos = []
@@ -130,12 +130,12 @@ def getConfirmedStudentsByVehicle():
 		queryResultDictionary = pengineService.buscaAlunosContaminadosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
 			alunos.append(item["X"])
-		return {"confirmedStudents": alunos}
+		return {"alunosConfirmados": alunos}
 	else:
-		return make_response({"message": f"You might be missing parameter veiculo for this request."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
 
-@app.route('/students/suspect', methods = ['GET'])
-def getSuspectStudents():
+@app.route('/api/alunos/suspeitas', methods = ['GET'])
+def buscaAlunosComSuspeita():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -144,12 +144,12 @@ def getSuspectStudents():
 		queryResultDictionary = pengineService.buscaAlunosSuspeitosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
 			alunos.append(item["X"])
-		return {"suspectStudents": alunos}
+		return {"alunosComSuspeita": alunos}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/students/suspect/amount', methods = ['GET'])
-def getSuspectStudentsAmount():
+@app.route('/api/alunos/suspeitas/quantidade', methods = ['GET'])
+def buscaQuantidadeDeAlunosComSuspeita():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -158,12 +158,12 @@ def getSuspectStudentsAmount():
 		quantity = 0
 		for item in queryResultDictionary:
 			quantity = item["Contador"]
-		return {"suspectStudentsAmount": quantity}
+		return {"quantidadeDeAlunosComSuspeita": quantity}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/students/city/suspect', methods = ['GET'])
-def getSuspectStudentsByCity():
+@app.route('/api/alunos/cidade/suspeitas', methods = ['GET'])
+def buscaAlunosComSuspeitaPorCidade():
 	data = request.get_json()
 	turma = data.get('turma')
 	cidade = data.get('cidade')
@@ -172,12 +172,12 @@ def getSuspectStudentsByCity():
 		queryResultDictionary = pengineService.buscaAlunosSuspeitosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
 			alunos.append(item["X"])
-		return {"suspectStudents": alunos}
+		return {"alunosComSuspeita": alunos}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or cidade for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
 	
-@app.route('/students/vehicle/suspect', methods = ['GET'])
-def getSuspectStudentsByVehicle():
+@app.route('/api/alunos/veiculo/suspeitas', methods = ['GET'])
+def buscaAlunosComSuspeitaPorVeiculo():
 	data = request.get_json()
 	veiculo = data.get('veiculo')
 	alunos = []
@@ -185,12 +185,12 @@ def getSuspectStudentsByVehicle():
 		queryResultDictionary = pengineService.buscaAlunosSuspeitosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
 			alunos.append(item["X"])
-		return {"suspectStudents": alunos}
+		return {"alunosComSuspeita": alunos}
 	else:
-		return make_response({"message": f"You might be missing parameter veiculo for this request."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
 
-@app.route('/students/dead', methods = ['GET'])
-def getDeadStudents():
+@app.route('/api/alunos/mortos', methods = ['GET'])
+def buscaAlunosMortos():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -199,12 +199,12 @@ def getDeadStudents():
 		queryResultDictionary = pengineService.buscaAlunosMortosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
 			alunos.append(item["X"])
-		return {"deadStudents": alunos}
+		return {"alunosMortos": alunos}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/students/dead/amount', methods = ['GET'])
-def getDeadStudentsAmount():
+@app.route('/api/alunos/morte/quantidade', methods = ['GET'])
+def buscaQuantidadeDeAlunosMortos():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -213,12 +213,12 @@ def getDeadStudentsAmount():
 		quantity = 0
 		for item in queryResultDictionary:
 			quantity = item["Contador"]
-		return {"deadStudentsAmount": quantity}
+		return {"quantidadeDeAlunosMortos": quantity}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/students/city/dead', methods = ['GET'])
-def getDeadStudentsByCity():
+@app.route('/api/alunos/cidade/mortos', methods = ['GET'])
+def buscaAlunosMortosPorCidade():
 	data = request.get_json()
 	turma = data.get('turma')
 	cidade = data.get('cidade')
@@ -227,12 +227,12 @@ def getDeadStudentsByCity():
 		queryResultDictionary = pengineService.buscaAlunosMortosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
 			alunos.append(item["X"])
-		return {"deadStudents": alunos}
+		return {"alunosMortos": alunos}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or cidade for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
 	
-@app.route('/students/vehicle/dead', methods = ['GET'])
-def getDeadStudentsByVehicle():
+@app.route('/api/alunos/veiculo/mortos', methods = ['GET'])
+def buscaAlunosMortosPorVeiculo():
 	data = request.get_json()
 	veiculo = data.get('veiculo')
 	alunos = []
@@ -240,12 +240,12 @@ def getDeadStudentsByVehicle():
 		queryResultDictionary = pengineService.buscaAlunosMortosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
 			alunos.append(item["X"])
-		return {"deadStudents": alunos}
+		return {"alunosMortos": alunos}
 	else:
-		return make_response({"message": f"You might be missing parameter veiculo for this request."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
 
-@app.route('/professors/confirmed', methods = ['GET'])
-def getConfirmedProfessors():
+@app.route('/api/professores/confirmados', methods = ['GET'])
+def buscaProfessoresConfirmados():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -254,12 +254,12 @@ def getConfirmedProfessors():
 		queryResultDictionary = pengineService.buscaProfessoresContaminadosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
 			professores.append(item["X"])
-		return {"confirmedProfessores": professores}
+		return {"professoresConfirmados": professores}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/professors/confirmed/amount', methods = ['GET'])
-def getConfirmedProfessorsAmount():
+@app.route('/api/professores/confirmados/quantidade', methods = ['GET'])
+def buscaQuantidadeDeProfessoresConfirmados():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -268,12 +268,12 @@ def getConfirmedProfessorsAmount():
 		quantity = 0
 		for item in queryResultDictionary:
 			quantity = item["Contador"]
-		return {"confirmedProfessorsAmount": quantity}
+		return {"quantidadeDeProfessoresConfirmados": quantity}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/professors/city/confirmed', methods = ['GET'])
-def getConfirmedProfessorsByCity():
+@app.route('/api/professores/cidade/confirmados', methods = ['GET'])
+def buscaProfessoresConfirmadosPorCidade():
 	data = request.get_json()
 	turma = data.get('turma')
 	cidade = data.get('cidade')
@@ -282,12 +282,12 @@ def getConfirmedProfessorsByCity():
 		queryResultDictionary = pengineService.buscaProfessoresContaminadosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
 			professores.append(item["X"])
-		return {"confirmedProfessors": professores}
+		return {"professoresConfirmados": professores}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or cidade for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
 	
-@app.route('/professors/vehicle/confirmed', methods = ['GET'])
-def getConfirmedProfessorsByVehicle():
+@app.route('/api/professores/veiculo/confirmados', methods = ['GET'])
+def buscaProfessoresConfirmadosPorVeiculo():
 	data = request.get_json()
 	veiculo = data.get('veiculo')
 	professores = []
@@ -295,12 +295,12 @@ def getConfirmedProfessorsByVehicle():
 		queryResultDictionary = pengineService.buscaProfessoresContaminadosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
 			professores.append(item["X"])
-		return {"confirmedProfessors": professores}
+		return {"professoresConfirmados": professores}
 	else:
-		return make_response({"message": f"You might be missing parameter veiculo for this request."}, 400)
+		return make_response({"mensage": f"Está faltando o parâmetro veículo."}, 400)
 		
-@app.route('/professors/suspect', methods = ['GET'])
-def getSuspectProfessors():
+@app.route('/api/professores/suspeitas', methods = ['GET'])
+def buscaProfessoresComSuspeita():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -309,12 +309,12 @@ def getSuspectProfessors():
 		queryResultDictionary = pengineService.buscaProfessoresSuspeitosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
 			professores.append(item["X"])
-		return {"suspectProfessores": professores}
+		return {"professoresComSuspeita": professores}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/professors/suspect/amount', methods = ['GET'])
-def getSuspectProfessorsAmount():
+@app.route('/api/professores/suspeitas/quantidade', methods = ['GET'])
+def buscaQuantidadeDeProfessoresComSuspeita():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -323,12 +323,12 @@ def getSuspectProfessorsAmount():
 		quantity = 0
 		for item in queryResultDictionary:
 			quantity = item["Contador"]
-		return {"suspectProfessorsAmount": quantity}
+		return {"quantidadeDeProfessoresComSuspeita": quantity}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/professors/city/suspect', methods = ['GET'])
-def getSuspectProfessorsByCity():
+@app.route('/api/professores/cidade/suspeitas', methods = ['GET'])
+def buscaProfessoresComSuspeitaPorVeiculo():
 	data = request.get_json()
 	turma = data.get('turma')
 	cidade = data.get('cidade')
@@ -337,12 +337,12 @@ def getSuspectProfessorsByCity():
 		queryResultDictionary = pengineService.buscaProfessoresSuspeitosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
 			professores.append(item["X"])
-		return {"suspectProfessors": professores}
+		return {"professoresComSuspeita": professores}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or cidade for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
 	
-@app.route('/professors/vehicle/suspect', methods = ['GET'])
-def getSuspectProfessorsByVehicle():
+@app.route('/api/professores/veiculo/suspeitas', methods = ['GET'])
+def buscaProfessoresComSuspeitaPorVeiculo():
 	data = request.get_json()
 	veiculo = data.get('veiculo')
 	professores = []
@@ -350,12 +350,12 @@ def getSuspectProfessorsByVehicle():
 		queryResultDictionary = pengineService.buscaProfessoresSuspeitosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
 			professores.append(item["X"])
-		return {"suspectProfessors": professores}
+		return {"professoresComSuspeita": professores}
 	else:
-		return make_response({"message": f"You might be missing parameter veiculo for this request."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
 
-@app.route('/professors/dead', methods = ['GET'])
-def getDeadProfessors():
+@app.route('/api/professores/mortos', methods = ['GET'])
+def buscaProfessoresMortos():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -364,12 +364,12 @@ def getDeadProfessors():
 		queryResultDictionary = pengineService.buscaProfessoresMortosPorTurmaESemestre(turma, semestre)
 		for item in queryResultDictionary:
 			professores.append(item["X"])
-		return {"deadProfessores": professores}
+		return {"professoresMortos": professores}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/professors/dead/amount', methods = ['GET'])
-def getDeadProfessorsAmount():
+@app.route('/api/professores/mortos/quantidede', methods = ['GET'])
+def buscaQuantidadeDeProfessoresMortos():
 	data = request.get_json()
 	turma = data.get('turma')
 	semestre = data.get('semestre')
@@ -378,12 +378,12 @@ def getDeadProfessorsAmount():
 		quantity = 0
 		for item in queryResultDictionary:
 			quantity = item["Contador"]
-		return {"deadProfessorsAmount": quantity}
+		return {"quantidadeDeProfessoresMortos": quantity}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or semestre for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou semestre."}, 400)
 
-@app.route('/professors/city/dead', methods = ['GET'])
-def getDeadProfessorsByCity():
+@app.route('/api/professores/cidade/mortos', methods = ['GET'])
+def buscaProfessoresMortosPorCidade():
 	data = request.get_json()
 	turma = data.get('turma')
 	cidade = data.get('cidade')
@@ -392,12 +392,12 @@ def getDeadProfessorsByCity():
 		queryResultDictionary = pengineService.buscaProfessoresMortosPorTurmaECidade(turma, cidade)
 		for item in queryResultDictionary:
 			professores.append(item["X"])
-		return {"deadProfessors": professores}
+		return {"professoresMortos": professores}
 	else:
-		return make_response({"message": f"You might be missing parameters turma or cidade for this request."}, 400)
+		return make_response({"mensagem": f"Podem estar faltando os parâmetros turma e/ou cidade."}, 400)
 	
-@app.route('/professors/vehicle/dead', methods = ['GET'])
-def getDeadProfessorsByVehicle():
+@app.route('/api/professores/veiculo/mortos', methods = ['GET'])
+def bsucaProfessoresMortosPorVeiculo():
 	data = request.get_json()
 	veiculo = data.get('veiculo')
 	professores = []
@@ -405,117 +405,117 @@ def getDeadProfessorsByVehicle():
 		queryResultDictionary = pengineService.buscaProfessoresMortosPorVeiculo(veiculo)
 		for item in queryResultDictionary:
 			professores.append(item["X"])
-		return {"deadProfessors": professores}
+		return {"professoresMortos": professores}
 	else:
-		return make_response({"message": f"You might be missing parameter veiculo for this request."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro veículo."}, 400)
 
 
-@app.route('/cases/confirmed/students/amount', methods = ['GET'])
-def getAllStudentConfirmedCases():
-	queryResultDictionary = pengineService.getAllStudentsConfirmedCasesAmount()
+@app.route('/api/casos/confirmados/alunos/quantidede', methods = ['GET'])
+def buscaQuantidadaTotalDeAlunosConfirmados():
+	queryResultDictionary = pengineService.buscarQuantidadeTotalDeAlunosConfirmados()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"confirmedStudentCasesAmount": quantity}
+	return {"quantidadeTotalDeAlunosConfirmados": quantity}
 
-@app.route('/cases/suspicious/students/amount', methods = ['GET'])
-def getAllStudentSuspiciousCases():
-	queryResultDictionary = pengineService.getAllStudentsSuspiciousCasesAmount()
+@app.route('/api/casos/suspeitas/alunos/quntidade', methods = ['GET'])
+def buscaQuantidadeTotalDeAlunosComSuspeita():
+	queryResultDictionary = pengineService.buscarQuantidadeTotalDeAlunosComSuspeita()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"suspiciousStudentCasesAmount": quantity}
+	return {"quantidadeTotalDeAlunosComSuspeita": quantity}
 
-@app.route('/cases/deaths/students/amount', methods = ['GET'])
-def getAllStudentDeathCases():
-	queryResultDictionary = pengineService.getAllStudentsDeathsAmount()
+@app.route('/api/casos/mortos/alunos/quantidade', methods = ['GET'])
+def buscaQuantidadeTotalDeAlunosMortos():
+	queryResultDictionary = pengineService.buscarQuantidadeTotalDeAlunosMortos()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"deadStudentCasesAmount": quantity}
+	return {"quantidadeTotalDeAlunosMortos": quantity}
 
-@app.route('/cases/non-infected/students/amount', methods = ['GET'])
-def getAllNonInfectedStudent():
-	queryResultDictionary = pengineService.getAllUninfectedStudentsAmount()
+@app.route('/api/casos/nao-infectados/alunos/quantidade', methods = ['GET'])
+def buscaQuantidadeTotalDeAlunosNaoInfectados():
+	queryResultDictionary = pengineService.buscarQuantidadeTotalDeAlunosNaoInfectados()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"nonInfectedStudentCasesAmount": quantity}
+	return {"quantidadeTotalDeAlunosNaoInfectados": quantity}
 
-@app.route('/cases/confirmed/professors/amount', methods = ['GET'])
-def getAllProfessorConfirmedCases():
-	queryResultDictionary = pengineService.getAllProfessorsConfirmedCasesAmount()
+@app.route('/api/casos/confirmados/professores/quantidade', methods = ['GET'])
+def buscaQuantidadeTotalDeProfessoresConfirmados():
+	queryResultDictionary = pengineService.buscarQuantidadeTotalDeProfessoresConfirmados()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"confirmedProfessorCasesAmount": quantity}
+	return {"quanditadeTotalDeProfessoresConfirmados": quantity}
 
-@app.route('/cases/suspicious/professors/amount', methods = ['GET'])
-def getAllProfessorSuspiciousCases():
-	queryResultDictionary = pengineService.getAllProfessorsSuspiciousCasesAmount()
+@app.route('/api/casos/suspeitas/professores/quantidade', methods = ['GET'])
+def buscaQuantidadeTotalDeProfessoresComSuspeita():
+	queryResultDictionary = pengineService.buscarQuantidadeTotalDeProfessoresComSuspeita()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"suspiciousProfessorCasesAmount": quantity}
+	return {"quantidadeTotalDeProfessoresComSuspeita": quantity}
 
-@app.route('/cases/deaths/professors/amount', methods = ['GET'])
-def getAllProfessorDeathCases():
-	queryResultDictionary = pengineService.getAllProfessorsDeathsAmount()
+@app.route('/api/casos/mortos/professores/quantidade', methods = ['GET'])
+def buscaQuantidadeTotalDeProfessoreMortos():
+	queryResultDictionary = pengineService.buscarQuantidadeTotalDeProfessoresMortos()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"deadProfessorCasesAmount": quantity}
+	return {"buscaQuantidadeTotalDeProfessoresMortos": quantity}
 
-@app.route('/cases/non-infected/professors/amount', methods = ['GET'])
-def getAllNonInfectedProfessor():
-	queryResultDictionary = pengineService.getAllUninfectedProfessorsAmount()
+@app.route('/api/casos/nao-infectados/professores/quantidede', methods = ['GET'])
+def buscaQuantidadeTotalDeProfessoresNaoInfectados():
+	queryResultDictionary = pengineService.buscarQuantidadeTotalDeProfessoresNaoInfectados()
 	quantity = 0
 	for item in queryResultDictionary:
 		quantity = item["Counter"]
-	return {"nonInfectedProfessorCasesAmount": quantity}
+	return {"quantidadeTotalDeProfessoresNaoInfectados": quantity}
 
-@app.route('/person/status/confirmed', methods = ['PUT'])
-def updatePersonToConfirmed():
+@app.route('/api/pessoa/status/confirmados', methods = ['PUT'])
+def atualizaStatusDaPessoaParaConfirmado():
 	data = request.get_json()
 	nome = data.get('nome')
 	if nome:
-		pengineService.updatePersonStatusToConfirmed(nome)
+		pengineService.atualizarStatusDaPessoaParaConfirmada(nome)
 		return f"Status atualizado com sucesso!."
 	else:
-		return make_response({"message": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
 
-@app.route('/person/status/suspect', methods = ['PUT'])
-def updatePersonToSuspect():
+@app.route('/api/pessoa/status/suspeita', methods = ['PUT'])
+def atualizaStatusdaPessoaParaSuspeita():
 	data = request.get_json()
 	nome = data.get('nome')
 	if nome:
-		pengineService.updatePersonStatusToSuspect(nome)
+		pengineService.atualizarStatusDaPessoaParaSuspeita(nome)
 		return f"Status atualizado com sucesso!."
 	else:
-		return make_response({"message": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
 
-@app.route('/person/status/dead', methods = ['PUT'])
-def updatePersonToDead():
+@app.route('/api/pessoa/status/morta', methods = ['PUT'])
+def atualizaStatusDaPessoaParaMorta():
 	data = request.get_json()
 	nome = data.get('nome')
 	if nome:
-		pengineService.updatePersonStatusToDead(nome)
+		pengineService.atualizarStatusDaPessoaParaMorta(nome)
 		return f"Status atualizado com sucesso!."
 	else:
-		return make_response({"message": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
 
-@app.route('/person/status/non-infected', methods = ['PUT'])
-def updatePersonToNonInfected():
+@app.route('/api/pessoa/status/nao-infectada', methods = ['PUT'])
+def atualizaStatusDaPessoaParaNaoInfectada():
 	data = request.get_json()
 	nome = data.get('nome')
 	if nome:
-		pengineService.updatePersonStatusToNonInfected(nome)
+		pengineService.atualizaStatusDaPessoaParaNaoInfectada(nome)
 		return f"Status atualizado com sucesso!."
 	else:
-		return make_response({"message": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
 
-@app.route('/students/confirmed/relatives', methods = ['GET'])
-def getRelativesFromInfectedStudents():
+@app.route('/api/alunos/confirmados/parentes', methods = ['GET'])
+def buscaAlunosParentesDeUmAlunoInfectado():
 	data = request.get_json()
 	nome = data.get('nome')
 	alunos = []
@@ -525,10 +525,10 @@ def getRelativesFromInfectedStudents():
 			alunos.append(item["X"])
 		return {"parentesInfectados": alunos}
 	else:
-		return make_response({"message": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
 	
-@app.route('/professors/confirmed/relatives', methods = ['GET'])
-def getRelativesFromInfectedProfessors():
+@app.route('/api/professores/confirmados/parentes', methods = ['GET'])
+def buscaProfessoreParentesDeUmProfessorInfectado():
 	data = request.get_json()
 	nome = data.get('nome')
 	alunos = []
@@ -538,4 +538,4 @@ def getRelativesFromInfectedProfessors():
 			alunos.append(item["X"])
 		return {"parentesInfectados": alunos}
 	else:
-		return make_response({"message": f"Está faltando o parâmetro nome."}, 400)
+		return make_response({"mensagem": f"Está faltando o parâmetro nome."}, 400)
