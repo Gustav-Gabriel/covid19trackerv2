@@ -1,0 +1,112 @@
+A documentação presente resume tudo utilizado na base de conhecimento criada em prolog.
+
+Parâmetros importantes:
+	
+	Variável Fixa (VF) - Utilizada apenas para relacionar dados;
+	Identificador (ID) - Um identificador inteiro presente em todas as relações e fatos que representa as pessoas sendo aluno ou professor;
+	Nome (N) - Uma variável string utilizada para instanciar e armazenar o nome das pessoas;
+	Turma (T) - Uma variável string utilizada para instanciar e armazenar a turma das pessoas; 
+	Cidade (C) - Uma variável string utilizada para instanciar e armazenar a cidada das pessoas;
+	Veiculo (V) - Uma variável string utilizada para instanciar e armazenar o veículo utilzado no transporte das pessoas.
+	Json (Json) - Uma variavel contendo as informações de um json passado ao fazer inserções de um ou mais dados.
+	Quantidade (Q) - Uma variável inteira que traz a quantidade relativa ao que foi pesquisado.
+	
+Predicatos
+	Fatos
+
+	pessoa(<ID>).
+	professor(<ID>).
+	aluno(<ID>).
+
+	confirmado(<ID>).
+	suspeita(<ID>).
+	morte(<ID>).
+
+
+	Relações
+
+	professor_nome(<ID>, <N>).
+	professor_turma(<ID>, <T>).
+	professor_semestre(<ID>, <S>).
+	professor_cidade(<ID>, <C>).
+	professor_transporte(<ID>, <V>).
+
+	aluno_nome(<ID>, <N>).
+	aluno_turma(<ID>, <T>).
+	aluno_semestre(<ID>, <S>).
+	aluno_cidade(<ID>, <C>).
+	aluno_transporte(<ID>, <V>).
+
+Regras
+	
+	Inserção
+
+	inserir_parentes(<Json>).
+	inserir_professores(<Json>).
+	inserir_alunos(<Json>).
+	inserir_casos_confirmados(<Json>).
+	inserir_casos_suspeitos(<Json>).
+	inserir_casos_morte(<Json>).
+	
+	
+	Busca de quantidades
+	
+	busca_quantidade_casos_confirmados(<ID>, Q).
+	busca_quantidade_casos_suspeitos(<ID>, Q).
+	busca_quantidade_casos_morte(<ID>, Q).
+	busca_quantidade_de_pessoas_nao_contaminadas(<ID>, Q).
+	busca_quantidade_de_alunos_contaminados_por_turma_e_semestre(<ID>, T, S, Q).
+	busca_quantidade_de_alunos_suspeitos_por_turma_e_semestre(<ID>, T, S, Q).
+	busca_quantidade_de_alunos_mortos_por_turma_e_semestre(<ID>, T, S, Q).
+	busca_quantidade_de_professores_contaminados_por_turma_e_semestre(<ID>, T, S, Q).
+	busca_quantidade_de_professores_suspeitos_por_turma_e_semestre(<ID>, T, S, Q).
+	busca_quantidade_de_professores_mortos_por_turma_e_semestre(<ID>, T, S, Q).
+	busca_quantidade_alunos_confirmados(<ID>, Q).
+	busca_quantidade_alunos_suspeitos(<ID>, Q).
+	busca_quantidade_alunos_mortos(<ID>, Q).
+	busca_quantidade_de_alunos_nao_contaminadas(<ID>, Q).
+	busca_quantidade_professores_confirmados(<ID>, Q).
+	busca_quantidade_professores_suspeitos(<ID>, Q).
+	busca_quantidade_professores_mortos(<ID>, Q).
+	busca_quantidade_de_professores_nao_contaminadas(<ID>, Q).
+	
+	
+	Busca de alunos
+	
+	busca_alunos_contaminados_por_turma_e_semestre(<VF>, <T>, <T>).
+	busca_alunos_contaminados_por_turma_e_cidade(<VF>, <T>, <C>).
+	busca_alunos_contaminados_por_veiculo(<VF>, <V>).
+	busca_alunos_suspeitos_por_turma_e_semestre(<VF>, <T>, <T>).
+	busca_alunos_suspeitos_por_turma_e_cidade(<VF>, <T>, <C>).
+	busca_alunos_suspeitos_por_veiculo(<VF>, <V>).
+	busca_alunos_mortos_por_turma_e_semestre(<VF>, <T>, <T>).
+	busca_alunos_mortos_por_turma_e_cidade(<VF>, <T>, <C>).
+	busca_alunos_mortos_por_veiculo(<VF>, <V>).
+	busca_alunos_parentes_de_outro_aluno_infectado(<VF>, <ID>).
+	
+	
+	Busca de professores
+	
+	busca_professores_contaminados_por_turma_e_semestre(<VF>, <T>, <T>).
+	busca_professores_contaminados_por_turma_e_cidade(<VF>, <T>, <C>).
+	busca_professores_contaminados_por_veiculo(<VF>, <V>).
+	busca_professores_suspeitos_por_turma_e_semestre(<VF>, <T>, <T>).
+	busca_professores_suspeitos_por_turma_e_cidade(<VF>, <T>, <C>).
+	busca_professores_suspeitos_por_veiculo(<VF>, <V>).
+	busca_professores_mortos_por_turma_e_semestre(<VF>, <T>, <T>).
+	busca_professores_mortos_por_turma_e_cidade(<VF>, <T>, <C>).
+	busca_professores_mortos_por_veiculo(<VF>, <V>).
+	busca_professores_parentes_de_outro_professor_infectado(<VF>, <ID>).
+	
+	
+	Atualizar
+	
+	atualizar_pessoa_para_confirmada(<ID>).
+	atualizar_pessoa_para_suspeita(<ID>).
+	atualizar_pessoa_para_morta(<ID>).
+	atualizar_pessoa_para_nao_infectada(<ID>).
+	
+	
+
+
+	
